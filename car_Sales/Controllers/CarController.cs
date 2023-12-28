@@ -16,7 +16,7 @@ namespace car_Sales.Controllers
             _context = context;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("GetAll")] //tüm araçları getirir
         public async Task<IActionResult> GetAllCar()
         {
             try
