@@ -38,7 +38,7 @@ builder.Services.AddAuthentication(options =>
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = builder.Configuration["JwtIssuer"],
                 ValidAudience = builder.Configuration["JwtAudience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSecurityKey"]))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JwtSecurityKey"]))    //jwt doðrulama kýsmýdýr.
             };
         });
 
