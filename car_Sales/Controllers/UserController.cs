@@ -24,7 +24,7 @@ namespace car_Sales.Controllers
             _configuration = configuration;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("GetAll")] //tüm kullanıcıları getirir.
         public async Task<IActionResult> GetAllUser()
         {
             try
