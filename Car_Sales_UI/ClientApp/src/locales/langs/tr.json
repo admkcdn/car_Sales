@@ -1,0 +1,26 @@
+{
+  "demo": {
+    "title": "Chinese"
+  },
+  "newuser":"Yeni Kullanıcı",
+  "createuser":"Kullanıcı Oluştur",
+  "createnewuser":"Yeni Kullanıcı Oluştur",
+  "user":"Kullanıcı",
+  "dashboard":"Panel",
+  "usersaved":"Kullanıcı Kaydedildi!",
+  "usercantsaved":"Kayıt Edilemedi!",
+  "name":"İsim",
+  "surname":"Soyisim",
+  "phonenumber":"Telefon Numarası",
+  "username":"Kullanıcı Adı",
+  "address":"Adres",
+  "password":"Şifre",
+  "nameisrequired":"İsim Gerekli",
+  "surnameisrequired":"Soyisim Gerekli",
+  "emailisrequired":"Email Gerekli",
+  "emailmustbeavalidemail":"E-posta geçerli bir e-posta adresi olmalıdır",
+  "phonenumberisrequired":"Telefon Numarası Gerekli",
+  "addressisrequired":"Adres Gerekli",
+  "usernameisrequired":"Kullanıcı Adı Gerekli",
+  "passwordisrequired":"Şifre Gerekli"
+}

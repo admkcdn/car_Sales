@@ -1,6 +1,6 @@
 import axios from 'axios';
 // config
-import { HOST_API } from 'src/config-global';
+import { HOST_API, HOST_API_LOCAL } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
@@ -12,6 +12,7 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
 
 // ----------------------------------------------------------------------
 
@@ -50,4 +51,7 @@ export const endpoints = {
     details: '/api/product/details',
     search: '/api/product/search',
   },
+  user:{
+    add:'/api/User/AddUser'
+  }
 };
