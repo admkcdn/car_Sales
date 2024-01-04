@@ -9,7 +9,7 @@ import { defaultLang } from './config-lang';
 import translationEn from './langs/en.json';
 import translationFr from './langs/fr.json';
 import translationVi from './langs/vi.json';
-import translationCn from './langs/cn.json';
+import translationTr from './langs/tr.json';
 import translationAr from './langs/ar.json';
 
 // ----------------------------------------------------------------------
@@ -24,7 +24,7 @@ i18n
       en: { translations: translationEn },
       fr: { translations: translationFr },
       vi: { translations: translationVi },
-      cn: { translations: translationCn },
+      tr: { translations: translationTr },
       ar: { translations: translationAr },
     },
     lng,

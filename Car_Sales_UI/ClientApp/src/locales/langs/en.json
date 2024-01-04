@@ -1,7 +1,7 @@
 {
   "app": "app",
   "job": "job",
-  "user": "user",
+  "user": "User",
   "list": "list",
   "edit": "edit",
   "shop": "shop",
@@ -22,7 +22,7 @@
   "booking": "booking",
   "profile": "profile",
   "account": "account",
-  "product": "product",
+  "product": "Adverts",
   "invoice": "invoice",
   "details": "details",
   "checkout": "checkout",
@@ -50,5 +50,26 @@
   "upgrade_to_pro": "Upgrade to Pro",
   "demo": {
     "title": "English"
-  }
+  },
+  "createuser":"Create User",
+  "createnewuser":"Create New User",
+  "dashboard":"Dashboard",
+  "usersaved":"User Registered!",
+  "usercantsaved":"User could not be registered",
+  "name":"Name",
+  "surname":"Surname",
+  "phonenumber":"Phone Number",
+  "username":"Username",
+  "address":"Address",
+  "password":"Password",
+  "nameisrequired":"Name is required",
+  "surnameisrequired":"Surname is required",
+  "emailisrequired":"Email is required",
+  "emailmustbeavalidemail":"Email must be a valid email address",
+  "phonenumberisrequired":"Phone number is required",
+  "addressisrequired":"Address is required",
+  "usernameisrequired":"Username is required",
+  "passwordisrequired":"Password is required",
+  "productcreated":"The advert created as successfully",
+  "productcantcreated":"The advert could not be created"
 }

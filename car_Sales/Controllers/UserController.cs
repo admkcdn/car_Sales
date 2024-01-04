@@ -65,14 +65,14 @@ namespace car_Sales.Controllers
                 if (change > 0)
                 {
                     var addedUser = await _context.users.OrderByDescending(x => x.ID).FirstOrDefaultAsync();
-                    return Ok(addedUser);
+                    var dataResult = DataResult<Users>.SuccessResult(addedUser!, "Kayıt Başarılı");
+                    return Ok(dataResult);
                 }
-                return BadRequest();
+                return BadRequest(DataResult<Users>.FailureResult("Kayıt gerçekleştirilemedi."));
             }
             catch (Exception ex)
             {
-
-                throw;
+                return BadRequest(DataResult<Users>.FailureResult(ex.Message));
             }
         }
 
@@ -167,7 +167,8 @@ namespace car_Sales.Controllers
                         expires: expiry,
                         signingCredentials: creds
                     );
-                    return Ok(DataResult<string>.SuccessResult(new JwtSecurityTokenHandler().WriteToken(token),"Giriş Başarılı"));
+
+                    return Ok(DataResult<LoginResult>.SuccessResult(new LoginResult() { AccessToken = new JwtSecurityTokenHandler().WriteToken(token) ,User = user}));
                 }
                 else
                 {

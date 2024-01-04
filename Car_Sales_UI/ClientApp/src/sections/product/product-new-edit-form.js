@@ -17,6 +17,7 @@ import Typography from '@mui/material/Typography';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControlLabel from '@mui/material/FormControlLabel';
 // routes
+import { t } from 'i18next';
 import { paths } from 'src/routes/paths';
 // hooks
 import { useResponsive } from 'src/hooks/use-responsive';
@@ -41,6 +42,7 @@ import FormProvider, {
   RHFAutocomplete,
   RHFMultiCheckbox,
 } from 'src/components/hook-form';
+import { postAdvert } from 'src/api/advert';
 
 // ----------------------------------------------------------------------
 
@@ -55,43 +57,35 @@ export default function ProductNewEditForm({ currentProduct }) {
 
   const NewProductSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    images: Yup.array().min(1, 'Images is required'),
-    tags: Yup.array().min(2, 'Must have at least 2 tags'),
-    category: Yup.string().required('Category is required'),
-    price: Yup.number().moreThan(0, 'Price should not be $0.00'),
-    description: Yup.string().required('Description is required'),
+    // images: Yup.array().min(1, 'Images is required'),
+    subDescription: Yup.string().required('SubDescription is required'),
+    brand: Yup.string().required('brand is required'),
+    model: Yup.string().required('model is required'),
+    kilometer: Yup.string().required('kilometer is required'),
+    horsepower: Yup.string().required('horsepower is required'),
+    quantity: Yup.string().required('quantity is required'),
+    color: Yup.string().required('color is required'),
+    // fuelType: Yup.object().shape({
+    //   value: Yup.string(),
+    //   label: Yup.string(),
+    // }),
     // not required
-    taxes: Yup.number(),
-    newLabel: Yup.object().shape({
-      enabled: Yup.boolean(),
-      content: Yup.string(),
-    }),
-    saleLabel: Yup.object().shape({
-      enabled: Yup.boolean(),
-      content: Yup.string(),
-    }),
   });
 
   const defaultValues = useMemo(
     () => ({
       name: currentProduct?.name || '',
-      description: currentProduct?.description || '',
       subDescription: currentProduct?.subDescription || '',
-      images: currentProduct?.images || [],
+      brand: currentProduct?.brand || '',
+      model: currentProduct?.model || '',
+      kilometer: currentProduct?.kilometer || '',
+      horsepower: currentProduct?.horsepower || '',
+      color: currentProduct?.color || '',
+      // images: currentProduct?.images || [],
+      // transmissionType: null,
+      // fuelType: null,
       //
-      code: currentProduct?.code || '',
-      sku: currentProduct?.sku || '',
-      price: currentProduct?.price || 0,
-      quantity: currentProduct?.quantity || 0,
-      priceSale: currentProduct?.priceSale || 0,
-      tags: currentProduct?.tags || [],
-      taxes: currentProduct?.taxes || 0,
-      gender: currentProduct?.gender || '',
-      category: currentProduct?.category || '',
-      colors: currentProduct?.colors || [],
-      sizes: currentProduct?.sizes || [],
-      newLabel: currentProduct?.newLabel || { enabled: false, content: '' },
-      saleLabel: currentProduct?.saleLabel || { enabled: false, content: '' },
+      quantity: currentProduct?.quantity || '',
     }),
     [currentProduct]
   );
@@ -117,20 +111,19 @@ export default function ProductNewEditForm({ currentProduct }) {
     }
   }, [currentProduct, defaultValues, reset]);
 
-  useEffect(() => {
-    if (includeTaxes) {
-      setValue('taxes', 0);
-    } else {
-      setValue('taxes', currentProduct?.taxes || 0);
-    }
-  }, [currentProduct?.taxes, includeTaxes, setValue]);
-
   const onSubmit = handleSubmit(async (data) => {
     try {
+      console.log('datadatadata ', data);
       await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
-      enqueueSnackbar(currentProduct ? 'Update success!' : 'Create success!');
-      router.push(paths.dashboard.product.root);
+      postAdvert(data).then((res) => {
+        if (res.data.success) {
+          enqueueSnackbar(t('productcreated'));
+          reset();
+        } else {
+          enqueueSnackbar(t('productcantcreated'), { variant: 'error' });
+        }
+      });
+      // router.push(paths.dashboard.product.root);
       console.info('DATA', data);
     } catch (error) {
       console.error(error);
@@ -173,10 +166,10 @@ export default function ProductNewEditForm({ currentProduct }) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Details
+            İlan Detayları
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Title, short description, image...
+            İlanınız hakkında başlık ve açıklama giriniz...
           </Typography>
         </Grid>
       )}
@@ -186,22 +179,16 @@ export default function ProductNewEditForm({ currentProduct }) {
           {!mdUp && <CardHeader title="Details" />}
 
           <Stack spacing={3} sx={{ p: 3 }}>
-            <RHFTextField name="name" label="Product Name" />
+            <RHFTextField name="name" label="İlan Adı" />
 
-            <RHFTextField name="subDescription" label="Sub Description" multiline rows={4} />
-
-            <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Content</Typography>
-              <RHFEditor simple name="description" />
-            </Stack>
+            <RHFTextField name="subDescription" label="İlan Açıklaması" multiline rows={4} />
 
             <Stack spacing={1.5}>
-              <Typography variant="subtitle2">Images</Typography>
+              <Typography variant="subtitle2">Resimler</Typography>
               <RHFUpload
                 multiple
                 thumbnail
                 name="images"
-                maxSize={3145728}
                 onDrop={handleDrop}
                 onRemove={handleRemoveFile}
                 onRemoveAll={handleRemoveAllFiles}
@@ -219,10 +206,10 @@ export default function ProductNewEditForm({ currentProduct }) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Properties
+            Araç Bilgileri
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Additional functions and attributes...
+            Araç bilgileri hakkında detaylı bilgleri giriniz...
           </Typography>
         </Grid>
       )}
@@ -241,93 +228,40 @@ export default function ProductNewEditForm({ currentProduct }) {
                 md: 'repeat(2, 1fr)',
               }}
             >
-              <RHFTextField name="code" label="Product Code" />
+              <RHFTextField name="brand" label="Marka" />
 
-              <RHFTextField name="sku" label="Product SKU" />
+              <RHFTextField name="model" label="Model" />
+
+              <RHFTextField name="kilometer" label="Kilometre" />
+
+              <RHFTextField name="horsepower" label="Beygir" />
 
               <RHFTextField
                 name="quantity"
-                label="Quantity"
+                label="Adet"
                 placeholder="0"
-                type="number"
                 InputLabelProps={{ shrink: true }}
               />
 
-              <RHFSelect native name="category" label="Category" InputLabelProps={{ shrink: true }}>
-                {PRODUCT_CATEGORY_GROUP_OPTIONS.map((category) => (
-                  <optgroup key={category.group} label={category.group}>
-                    {category.classify.map((classify) => (
-                      <option key={classify} value={classify}>
-                        {classify}
-                      </option>
-                    ))}
-                  </optgroup>
-                ))}
-              </RHFSelect>
-
-              <RHFMultiSelect
-                checkbox
-                name="colors"
-                label="Colors"
-                options={PRODUCT_COLOR_NAME_OPTIONS}
+              <RHFAutocomplete
+                label="Yakıt Tipi"
+                name="fuelType"
+                options={[{ label: 'Benzin', value: '1' },{ label: 'Dizel', value: '2' },{ label: 'Tüp + Benzin', value: '3' }]}
               />
 
-              <RHFMultiSelect checkbox name="sizes" label="Sizes" options={PRODUCT_SIZE_OPTIONS} />
+              <RHFTextField name="color" label="Renk" />
+
+              <RHFAutocomplete
+                name="transmissionType"
+                label="Şanzıman"
+                options={[
+                  { label: 'Otomatik', value: '1' },
+                  { label: 'Manuel', value: '2' },
+                ]}
+              />
             </Box>
 
-            <RHFAutocomplete
-              name="tags"
-              label="Tags"
-              placeholder="+ Tags"
-              multiple
-              freeSolo
-              options={_tags.map((option) => option)}
-              getOptionLabel={(option) => option}
-              renderOption={(props, option) => (
-                <li {...props} key={option}>
-                  {option}
-                </li>
-              )}
-              renderTags={(selected, getTagProps) =>
-                selected.map((option, index) => (
-                  <Chip
-                    {...getTagProps({ index })}
-                    key={option}
-                    label={option}
-                    size="small"
-                    color="info"
-                    variant="soft"
-                  />
-                ))
-              }
-            />
-
-            <Stack spacing={1}>
-              <Typography variant="subtitle2">Gender</Typography>
-              <RHFMultiCheckbox row name="gender" spacing={2} options={PRODUCT_GENDER_OPTIONS} />
-            </Stack>
-
-            <Divider sx={{ borderStyle: 'dashed' }} />
-
-            <Stack direction="row" alignItems="center" spacing={3}>
-              <RHFSwitch name="saleLabel.enabled" label={null} sx={{ m: 0 }} />
-              <RHFTextField
-                name="saleLabel.content"
-                label="Sale Label"
-                fullWidth
-                disabled={!values.saleLabel.enabled}
-              />
-            </Stack>
-
-            <Stack direction="row" alignItems="center" spacing={3}>
-              <RHFSwitch name="newLabel.enabled" label={null} sx={{ m: 0 }} />
-              <RHFTextField
-                name="newLabel.content"
-                label="New Label"
-                fullWidth
-                disabled={!values.newLabel.enabled}
-              />
-            </Stack>
+            <Divider sx={{ borderStyle: 'dotted' }} />
           </Stack>
         </Card>
       </Grid>
@@ -339,10 +273,10 @@ export default function ProductNewEditForm({ currentProduct }) {
       {mdUp && (
         <Grid md={4}>
           <Typography variant="h6" sx={{ mb: 0.5 }}>
-            Pricing
+            Fiyat
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            Price related inputs
+            Aracınızıa biçilen satış fiyatı
           </Typography>
         </Grid>
       )}
@@ -354,32 +288,14 @@ export default function ProductNewEditForm({ currentProduct }) {
           <Stack spacing={3} sx={{ p: 3 }}>
             <RHFTextField
               name="price"
-              label="Regular Price"
+              label="Fiyat"
               placeholder="0.00"
-              type="number"
               InputLabelProps={{ shrink: true }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
                     <Box component="span" sx={{ color: 'text.disabled' }}>
-                      $
-                    </Box>
-                  </InputAdornment>
-                ),
-              }}
-            />
-
-            <RHFTextField
-              name="priceSale"
-              label="Sale Price"
-              placeholder="0.00"
-              type="number"
-              InputLabelProps={{ shrink: true }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Box component="span" sx={{ color: 'text.disabled' }}>
-                      $
+                      ₺
                     </Box>
                   </InputAdornment>
                 ),
@@ -388,27 +304,8 @@ export default function ProductNewEditForm({ currentProduct }) {
 
             <FormControlLabel
               control={<Switch checked={includeTaxes} onChange={handleChangeIncludeTaxes} />}
-              label="Price includes taxes"
+              label="Pazarlık payına açık bir fiyatlandırma mı ?"
             />
-
-            {!includeTaxes && (
-              <RHFTextField
-                name="taxes"
-                label="Tax (%)"
-                placeholder="0.00"
-                type="number"
-                InputLabelProps={{ shrink: true }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <Box component="span" sx={{ color: 'text.disabled' }}>
-                        %
-                      </Box>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            )}
           </Stack>
         </Card>
       </Grid>
@@ -419,14 +316,8 @@ export default function ProductNewEditForm({ currentProduct }) {
     <>
       {mdUp && <Grid md={4} />}
       <Grid xs={12} md={8} sx={{ display: 'flex', alignItems: 'center' }}>
-        <FormControlLabel
-          control={<Switch defaultChecked />}
-          label="Publish"
-          sx={{ flexGrow: 1, pl: 3 }}
-        />
-
         <LoadingButton type="submit" variant="contained" size="large" loading={isSubmitting}>
-          {!currentProduct ? 'Create Product' : 'Save Changes'}
+          İlan Oluştur
         </LoadingButton>
       </Grid>
     </>

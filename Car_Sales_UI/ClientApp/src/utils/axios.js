@@ -1,10 +1,11 @@
 import axios from 'axios';
 // config
-import { HOST_API } from 'src/config-global';
+import { HOST_API, HOST_API_LOCAL } from 'src/config-global';
 
 // ----------------------------------------------------------------------
 
-const axiosInstance = axios.create({ baseURL: HOST_API });
+// const axiosInstance = axios.create({ baseURL: HOST_API });
+const axiosInstance = axios.create({ baseURL: HOST_API_LOCAL });
 
 axiosInstance.interceptors.response.use(
   (res) => res,
@@ -12,6 +13,7 @@ axiosInstance.interceptors.response.use(
 );
 
 export default axiosInstance;
+
 
 // ----------------------------------------------------------------------
 
@@ -30,8 +32,8 @@ export const endpoints = {
   kanban: '/api/kanban',
   calendar: '/api/calendar',
   auth: {
-    me: '/api/auth/me',
-    login: '/api/auth/login',
+    me: '/api/Login/Me',
+    login: '/api/Login/LoginUser',
     register: '/api/auth/register',
   },
   mail: {
@@ -46,8 +48,14 @@ export const endpoints = {
     search: '/api/post/search',
   },
   product: {
-    list: '/api/product/list',
-    details: '/api/product/details',
+    list: '/api/Advert/GetAdverts',
+    details: '/api/Advert/Detail',
     search: '/api/product/search',
   },
+  user:{
+    add:'/api/User/AddUser'
+  },
+  advert:{
+    add:'/api/Advert/AddAdvert'
+  }
 };

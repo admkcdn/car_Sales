@@ -33,18 +33,18 @@ import ProductDetailsDescription from '../product-details-description';
 
 const SUMMARY = [
   {
-    title: '100% Original',
-    description: 'Chocolate bar candy canes ice cream toffee cookie halvah.',
+    title: '100% Orijinal',
+    description: 'İlanlar orijinallik güvencesi sağlar.',
     icon: 'solar:verified-check-bold',
   },
   {
-    title: '10 Day Replacement',
-    description: 'Marshmallow biscuit donut dragée fruitcake wafer.',
+    title: '10 Gün Para Koruma',
+    description: 'Alışveriş sonrası 10 gün içinde iade garantisi.',
     icon: 'solar:clock-circle-bold',
   },
   {
-    title: 'Year Warranty',
-    description: 'Cotton candy gingerbread cake I love sugar sweet.',
+    title: 'Güvenli Alışveriş',
+    description: 'Yapılan tüm alışverişiniz Marabam.com tarafından güvencelidir.',
     icon: 'solar:shield-check-bold',
   },
 ];
@@ -62,7 +62,7 @@ export default function ProductDetailsView({ id }) {
 
   useEffect(() => {
     if (product) {
-      setPublish(product?.publish);
+      setPublish(product);
     }
   }, [product]);
 
@@ -96,14 +96,14 @@ export default function ProductDetailsView({ id }) {
 
   const renderProduct = product && (
     <>
-      <ProductDetailsToolbar
+      {/* <ProductDetailsToolbar
         backLink={paths.dashboard.product.root}
         editLink={paths.dashboard.product.edit(`${product?.id}`)}
         liveLink={paths.product.details(`${product?.id}`)}
         publish={publish || ''}
         onChangePublish={handleChangePublish}
         publishOptions={PRODUCT_PUBLISH_OPTIONS}
-      />
+      /> */}
 
       <Grid container spacing={{ xs: 3, md: 5, lg: 8 }}>
         <Grid xs={12} md={6} lg={7}>
@@ -155,7 +155,7 @@ export default function ProductDetailsView({ id }) {
             },
             {
               value: 'reviews',
-              label: `Reviews (${product.reviews.length})`,
+              label: `Reviews`,
             },
           ].map((tab) => (
             <Tab key={tab.value} value={tab.value} label={tab.label} />
@@ -166,14 +166,14 @@ export default function ProductDetailsView({ id }) {
           <ProductDetailsDescription description={product?.description} />
         )}
 
-        {currentTab === 'reviews' && (
+        {/* {currentTab === 'reviews' && (
           <ProductDetailsReview
             ratings={product.ratings}
             reviews={product.reviews}
             totalRatings={product.totalRatings}
             totalReviews={product.totalReviews}
           />
-        )}
+        )} */}
       </Card>
     </>
   );

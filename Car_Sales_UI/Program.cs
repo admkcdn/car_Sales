@@ -42,11 +42,16 @@ builder.Services.AddCors(options =>
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials();
+
+            builder.WithOrigins("https://localhost:44497")
+                     .AllowAnyHeader()
+                     .AllowAnyMethod();
         });
 });
 
 builder.Services.AddHttpClient<LoginController>();
 builder.Services.AddHttpClient<AdvertController>();
+builder.Services.AddHttpClient<UserController>();
 
 var app = builder.Build();
 
@@ -61,6 +66,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseCors(x => x.AllowAnyHeader()
+      .AllowAnyMethod()
+      .WithOrigins("https://localhost:44497"));
+app.UseCors("AllowedCorsOrigins");
 
 app.MapControllerRoute(
     name: "default",

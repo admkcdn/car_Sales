@@ -56,11 +56,11 @@ export const allLangs = [
     icon: 'flagpack:vn',
   },
   {
-    label: 'Chinese',
-    value: 'cn',
+    label: 'Türkçe',
+    value: 'tr',
     systemValue: merge(zhCNDate, zhCNDataGrid, zhCNCore),
     adapterLocale: zhCNAdapter,
-    icon: 'flagpack:cn',
+    icon: 'flagpack:tr',
   },
   {
     label: 'Arabic',

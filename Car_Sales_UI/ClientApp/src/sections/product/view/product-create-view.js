@@ -16,17 +16,17 @@ export default function ProductCreateView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Create a new product"
+        heading="İlan Oluştur"
         links={[
           {
-            name: 'Dashboard',
+            name: 'Yönetim Paneli',
             href: paths.dashboard.root,
           },
           {
-            name: 'Product',
+            name: 'İlanlar',
             href: paths.dashboard.product.root,
           },
-          { name: 'New product' },
+          { name: 'Yeni İlan' },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },

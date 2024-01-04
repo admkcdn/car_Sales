@@ -1,6 +1,7 @@
 // @mui
 import Container from '@mui/material/Container';
 // routes
+import { t } from 'i18next';
 import { paths } from 'src/routes/paths';
 // components
 import { useSettingsContext } from 'src/components/settings';
@@ -16,17 +17,17 @@ export default function UserCreateView() {
   return (
     <Container maxWidth={settings.themeStretch ? false : 'lg'}>
       <CustomBreadcrumbs
-        heading="Create a new user"
+        heading={t("createnewuser")}
         links={[
           {
             name: 'Dashboard',
             href: paths.dashboard.root,
           },
           {
-            name: 'User',
+            name: t("user"),
             href: paths.dashboard.user.root,
           },
-          { name: 'New user' },
+          { name: t("newuser") },
         ]}
         sx={{
           mb: { xs: 3, md: 5 },
