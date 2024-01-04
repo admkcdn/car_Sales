@@ -12,8 +12,8 @@ using car_Sales.Models;
 namespace car_Sales.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20231219181311_mig5")]
-    partial class mig5
+    [Migration("20240103203446_mig2")]
+    partial class mig2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

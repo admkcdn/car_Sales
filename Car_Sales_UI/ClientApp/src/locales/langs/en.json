@@ -22,7 +22,7 @@
   "booking": "booking",
   "profile": "profile",
   "account": "account",
-  "product": "product",
+  "product": "Adverts",
   "invoice": "invoice",
   "details": "details",
   "checkout": "checkout",
@@ -69,5 +69,7 @@
   "phonenumberisrequired":"Phone number is required",
   "addressisrequired":"Address is required",
   "usernameisrequired":"Username is required",
-  "passwordisrequired":"Password is required"
+  "passwordisrequired":"Password is required",
+  "productcreated":"The advert created as successfully",
+  "productcantcreated":"The advert could not be created"
 }

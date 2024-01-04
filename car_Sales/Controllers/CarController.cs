@@ -1,7 +1,9 @@
 ﻿using car_Sales.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace car_Sales.Controllers
 {
@@ -10,10 +12,15 @@ namespace car_Sales.Controllers
     public class CarController : ControllerBase
     {
         private readonly Context _context;
+        private readonly IConfiguration _configuration;
 
-        public CarController(Context context)
+        private readonly string connectionString;
+
+        public CarController(Context context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
+            connectionString = _configuration.GetValue<string>("ConnectionStrings:DefaultConnection");
         }
 
         [HttpGet("GetAll")]

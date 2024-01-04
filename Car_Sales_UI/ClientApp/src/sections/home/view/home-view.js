@@ -56,8 +56,8 @@ export default function HomeView() {
           bgcolor: 'background.default',
         }}
       >
-        <HomeMinimal />
-
+        {/* <HomeMinimal /> */}
+{/* 
         <HomeHugePackElements />
 
         <Box sx={{ position: 'relative' }}>
@@ -76,7 +76,7 @@ export default function HomeView() {
 
         <HomeLookingFor />
 
-        <HomeAdvertisement />
+        <HomeAdvertisement /> */}
       </Box>
     </>
   );

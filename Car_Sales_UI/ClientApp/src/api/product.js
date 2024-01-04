@@ -9,36 +9,39 @@ export function useGetProducts() {
   const URL = endpoints.product.list;
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
+  console.log('data ', data);
 
   const memoizedValue = useMemo(
     () => ({
-      products: data?.products || [],
+      products: data || [],
       productsLoading: isLoading,
       productsError: error,
       productsValidating: isValidating,
-      productsEmpty: !isLoading && !data?.products.length,
+      productsEmpty: !isLoading && !data.length,
     }),
-    [data?.products, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating]
   );
-
+  console.log('memoizedValue ', memoizedValue);
   return memoizedValue;
 }
 
 // ----------------------------------------------------------------------
 
-export function useGetProduct(productId) {
-  const URL = productId ? [endpoints.product.details, { params: { productId } }] : null;
+export function useGetProduct(advertId) {
+  const URL = advertId ? [endpoints.product.details, { params: { advertId } }] : null;
 
   const { data, isLoading, error, isValidating } = useSWR(URL, fetcher);
 
+  console.log("advertDataa ",data);
+
   const memoizedValue = useMemo(
     () => ({
-      product: data?.product,
+      product: data,
       productLoading: isLoading,
       productError: error,
       productValidating: isValidating,
     }),
-    [data?.product, error, isLoading, isValidating]
+    [data, error, isLoading, isValidating]
   );
 
   return memoizedValue;

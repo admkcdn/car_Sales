@@ -68,6 +68,8 @@ export default function ProductDetailsCarousel({ product }) {
     src: img,
   }));
 
+  console.log("productproduct ",product);
+
   const lightbox = useLightBox(slides);
 
   const carouselLarge = useCarousel({

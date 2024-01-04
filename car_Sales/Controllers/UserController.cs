@@ -167,7 +167,8 @@ namespace car_Sales.Controllers
                         expires: expiry,
                         signingCredentials: creds
                     );
-                    return Ok(DataResult<string>.SuccessResult(new JwtSecurityTokenHandler().WriteToken(token), "Giriş Başarılı"));
+
+                    return Ok(DataResult<LoginResult>.SuccessResult(new LoginResult() { AccessToken = new JwtSecurityTokenHandler().WriteToken(token) ,User = user}));
                 }
                 else
                 {

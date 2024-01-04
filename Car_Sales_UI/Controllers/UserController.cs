@@ -25,7 +25,6 @@ namespace Car_Sales_UI.Controllers
         [HttpPost("AddUser")]
         public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
         {
-            var res = userDto;
             var url = baseUrl + "User/Create";
             var response = await _httpClient.PostAsJsonAsync(url, userDto);
             if (response.StatusCode == System.Net.HttpStatusCode.OK)

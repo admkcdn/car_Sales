@@ -182,8 +182,8 @@ export default function HomeHero() {
             textAlign: 'center',
           }}
         >
-          Start a <br />
-          New Project with
+          İlanların <br />
+          En Kolay Satış Sitesi
         </Typography>
       </m.div>
 
@@ -197,14 +197,13 @@ export default function HomeHero() {
             repeat: Infinity,
           }}
         >
-          Minimal
+          Marabam.com
         </StyledTextGradient>
       </m.div>
 
       <m.div variants={varFade().in}>
         <Typography variant="body2" sx={{ textAlign: 'center' }}>
-          The starting point for your next project is based on MUI.Easy customization Helps you
-          build apps faster and better.
+          Her türlü araçları kolayca ilana koy ve pazarla. hem de marabam.com güvencesiyle!
         </Typography>
       </m.div>
 
@@ -219,9 +218,9 @@ export default function HomeHero() {
           <Rating readOnly value={4.95} precision={0.1} max={5} />
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
             <Box component="strong" sx={{ mr: 0.5, color: 'text.primary' }}>
-              4.96/5
+              4.96/5 Memnuniyet
             </Box>
-            (99+ reviews)
+            (99+ oylama)
           </Typography>
         </Stack>
       </m.div>
@@ -237,60 +236,11 @@ export default function HomeHero() {
               variant="contained"
               startIcon={<Iconify icon="eva:flash-fill" width={24} />}
             >
-              Live Preview
+              Hemen İlan Oluştur
             </Button>
-
-            <Link
-              color="inherit"
-              variant="caption"
-              target="_blank"
-              rel="noopener"
-              href={paths.freeUI}
-              sx={{
-                textDecoration: 'underline',
-                display: 'inline-flex',
-                alignItems: 'center',
-              }}
-            >
-              <Iconify icon="eva:external-link-fill" width={16} sx={{ mr: 0.5 }} />
-              Get Free Version
-            </Link>
           </Stack>
-
-          <Button
-            color="inherit"
-            size="large"
-            variant="outlined"
-            startIcon={<Iconify icon="eva:external-link-fill" width={24} />}
-            target="_blank"
-            rel="noopener"
-            href={paths.figma}
-            sx={{ borderColor: 'text.primary' }}
-          >
-            Design Preview
-          </Button>
         </Stack>
       </m.div>
-
-      <Stack spacing={3} sx={{ textAlign: 'center' }}>
-        <m.div variants={varFade().in}>
-          <Typography variant="overline" sx={{ opacity: 0.4 }}>
-            Available For
-          </Typography>
-        </m.div>
-
-        <Stack spacing={2} direction="row" justifyContent="center">
-          {['figma', 'js', 'ts', 'nextjs', 'vite'].map((platform) => (
-            <m.div key={platform} variants={varFade().in}>
-              <Box
-                component="img"
-                src={`/assets/icons/platforms/ic_${platform}.svg`}
-                sx={{ width: 24, height: 24 }}
-              />
-            </m.div>
-          ))}
-        </Stack>
-      </Stack>
     </Stack>
   );
 

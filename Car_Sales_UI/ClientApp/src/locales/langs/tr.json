@@ -1,6 +1,6 @@
 {
   "demo": {
-    "title": "Chinese"
+    "title": "Turkish"
   },
   "newuser":"Yeni Kullanıcı",
   "createuser":"Kullanıcı Oluştur",
@@ -22,5 +22,17 @@
   "phonenumberisrequired":"Telefon Numarası Gerekli",
   "addressisrequired":"Adres Gerekli",
   "usernameisrequired":"Kullanıcı Adı Gerekli",
-  "passwordisrequired":"Şifre Gerekli"
+  "passwordisrequired":"Şifre Gerekli",
+  "product": "İlanlar",
+  "productcreated":"İlan Başarıyla Oluşturulmuştur",
+  "productcantcreated":"İlan Oluşturulamadı",
+  "create":"Kayıt",
+  "list":"Liste",
+  "profile":"Profil",
+  "management":"Yönetim",
+  "banking":"Banka İşlemleri",
+  "analytics":"Analiz/Raporlama",
+  "ecommerce":"E-Ticaret",
+  "app":"Ana Sayfa",
+  "overview":"Özet"
 }

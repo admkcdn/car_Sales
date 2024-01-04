@@ -32,19 +32,13 @@ export default function ProductTableRow({
   onEditRow,
   onViewRow,
 }) {
-  const {
-    name,
-    price,
-    publish,
-    coverUrl,
-    category,
-    quantity,
-    createdAt,
-    available,
-    inventoryType,
-  } = row;
+  const { createDate, description, isActive, title, type, transmissionType,price,status,carImage } = row;
 
   const confirm = useBoolean();
+
+  console.log('row ', row);
+  
+  console.log('CarImage ', carImage);
 
   const popover = usePopover();
 
@@ -57,8 +51,8 @@ export default function ProductTableRow({
 
         <TableCell sx={{ display: 'flex', alignItems: 'center' }}>
           <Avatar
-            alt={name}
-            src={coverUrl}
+            alt={title}
+            src={carImage}
             variant="rounded"
             sx={{ width: 64, height: 64, mr: 2 }}
           />
@@ -73,12 +67,12 @@ export default function ProductTableRow({
                 onClick={onViewRow}
                 sx={{ cursor: 'pointer' }}
               >
-                {name}
+                {title}
               </Link>
             }
             secondary={
               <Box component="div" sx={{ typography: 'body2', color: 'text.disabled' }}>
-                {category}
+                {type}
               </Box>
             }
           />
@@ -86,8 +80,8 @@ export default function ProductTableRow({
 
         <TableCell>
           <ListItemText
-            primary={format(new Date(createdAt), 'dd MMM yyyy')}
-            secondary={format(new Date(createdAt), 'p')}
+            primary={format(new Date(createDate), 'dd MMM yyyy')}
+            secondary={format(new Date(createDate), 'p')}
             primaryTypographyProps={{ typography: 'body2', noWrap: true }}
             secondaryTypographyProps={{
               mt: 0.5,
@@ -98,24 +92,14 @@ export default function ProductTableRow({
         </TableCell>
 
         <TableCell sx={{ typography: 'caption', color: 'text.secondary' }}>
-          <LinearProgress
-            value={(available * 100) / quantity}
-            variant="determinate"
-            color={
-              (inventoryType === 'out of stock' && 'error') ||
-              (inventoryType === 'low stock' && 'warning') ||
-              'success'
-            }
-            sx={{ mb: 1, height: 6, maxWidth: 80 }}
-          />
-          {!!available && available} {inventoryType}
+           {transmissionType}
         </TableCell>
 
-        <TableCell>{fCurrency(price)}</TableCell>
+        <TableCell>₺{fCurrency(price)}</TableCell>
 
         <TableCell>
-          <Label variant="soft" color={(publish === 'published' && 'info') || 'default'}>
-            {publish}
+          <Label variant="soft" color={status ? "success" : "error"}>
+            {status ? "İlanda" : "İlan Dışı"}
           </Label>
         </TableCell>
 
